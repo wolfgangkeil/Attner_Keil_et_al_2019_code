@@ -1,19 +1,30 @@
-function plot_Z1Z4_traces(experiment_folder,worm_index, axis_handle)
+function plot_Z1Z4_traces(experiment_date,worm_index)
 %
 % DESCRIPTION
 % this function plots a fluorescence traces for Z1.pp and Z4.aa and
 % daughters as in Figure 2A, Figure S2E in Attner & Keil et al. (2019)
 % experiment needs to be stored in a folder {strain_name}/{Micro-Manager folder}
 % 
-% 
+% EXAMPLES: 
+% plot_Z1Z4_traces('27-Sep-2018', 2);
+% plot_Z1Z4_traces('10-Oct-2018', 2);
+% plot_Z1Z4_traces('10-Oct-2018', 4);
+% plot_Z1Z4_traces('10-Oct-2018', 9);
 %   
 % by Wolfgang Keil, wolfgang.keil@curie.fr 2019
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
     
+    strain_name = 'GS9062';
+
     do_interpolation = 1;
     do_filtering = 1;
+    
+    addpath('../cell_lineage_analysis/');
+    tracing_foldername = ['data/fluo_tracing/' ...
+                    strain_name '/']; % folder with .mat files 
+    
     
     % Filter settings
     filter_shape = 'Gaussian';
@@ -22,53 +33,47 @@ function plot_Z1Z4_traces(experiment_folder,worm_index, axis_handle)
     
     %  experiments are imaged every 16min, except 10-Oct-2018
     plot_alphacells_only = 1;
-    if strfind(experiment_folder, '10-Oct-2018')
+    if strfind(experiment_date, '10-Oct-2018')
         imaging_interval = 8;        
     else
         imaging_interval = 16;
     end
     
     % Cases 1,2,3 in Figure 2 of Attner & Keil et al., 2019
-    if (strfind(experiment_folder, '10-Oct-2018') & (worm_index ==  2 || worm_index ==  9)) | ...
-            (strfind(experiment_folder, '04-Oct-2018') & worm_index ==  7)
+    if (strfind(experiment_date, '10-Oct-2018') & (worm_index ==  2 || worm_index ==  9)) | ...
+            (strfind(experiment_date, '04-Oct-2018') & worm_index ==  7)
         plot_alphacells_only = 1;
     end
     
     
-    tmp = strfind(experiment_folder,'/');
-    strain_name = experiment_folder(tmp(end-2)+1:tmp(end-1)-1);
-    exp_name = experiment_folder(tmp(end-1)+1:tmp(end)-1);
     
-    
-    % Generate the worm_file name to get birth-timings (need to rename Months to numbers)
-    worm_file_folder = ['/Users/wolfgang/Dropbox/birth_order_project/lineaging_data/25degrees/' strain_name '/'];
-    if strfind(experiment_folder, 'Nov-2018')
-        worm_filename = [strain_name '_2018-11-' exp_name(1:2) '_Worm' num2str(worm_index) '.txt'];
-    elseif strfind(experiment_folder, 'Oct-2018')
-        worm_filename = [strain_name '_2018-10-' exp_name(1:2) '_Worm' num2str(worm_index) '.txt'];
-    elseif strfind(experiment_folder, 'Sep-2018')
-        worm_filename = [strain_name '_2018-09-' exp_name(1:2) '_Worm' num2str(worm_index) '.txt'];
-    elseif strfind(experiment_folder, 'Apr-2018')
-        worm_filename = [strain_name '_2018-04-' exp_name(1:2) '_Worm' num2str(worm_index) '.txt'];
-    elseif strfind(experiment_folder, 'May-2018')
-        worm_filename = [strain_name '_2018-05-' exp_name(1:2) '_Worm' num2str(worm_index) '.txt'];
-    elseif strfind(experiment_folder, 'May-2019')
-        worm_filename = [strain_name '_2019-05-' exp_name(1:2) '_Worm' num2str(worm_index) '.txt'];
-    elseif strfind(experiment_folder, 'Apr-2019')
-        worm_filename = [strain_name '_2019-04-' exp_name(1:2) '_Worm' num2str(worm_index) '.txt'];
+    % Generate the worm_file name to get birth-timings (need to rename months to numbers)
+    worm_file_folder = ['../cell_lineage_analysis/lineaging_data/25degrees/' strain_name '/'];
+    if strfind(experiment_date, 'Nov-2018')
+        worm_filename = [strain_name '_2018-11-' experiment_date(1:2) '_Worm' num2str(worm_index) '.txt'];
+    elseif strfind(experiment_date, 'Oct-2018')
+        worm_filename = [strain_name '_2018-10-' experiment_date(1:2) '_Worm' num2str(worm_index) '.txt'];
+    elseif strfind(experiment_date, 'Sep-2018')
+        worm_filename = [strain_name '_2018-09-' experiment_date(1:2) '_Worm' num2str(worm_index) '.txt'];
+    elseif strfind(experiment_date, 'Apr-2018')
+        worm_filename = [strain_name '_2018-04-' experiment_date(1:2) '_Worm' num2str(worm_index) '.txt'];
+    elseif strfind(experiment_date, 'May-2018')
+        worm_filename = [strain_name '_2018-05-' experiment_date(1:2) '_Worm' num2str(worm_index) '.txt'];
+    elseif strfind(experiment_date, 'May-2019')
+        worm_filename = [strain_name '_2019-05-' experiment_date(1:2) '_Worm' num2str(worm_index) '.txt'];
+    elseif strfind(experiment_date, 'Apr-2019')
+        worm_filename = [strain_name '_2019-04-' experiment_date(1:2) '_Worm' num2str(worm_index) '.txt'];
     end
+    
+    
+    tracing_filename = [strain_name '_' experiment_date '_'  num2str(worm_index) '.mat'];
+    
     %
     disp('Loading lineage file...');
     worm = read_single_worm_lineage_data([worm_file_folder worm_filename]);
     
     div_times = get_3rd_division_times(worm);
     
-    ext_harddrive_path = [experiment_folder '/worm_' num2str(worm_index) '/Pos0/']; % File on harddrive
-    int_harddrive_path = ['/Users/wolfgang/Dropbox/birth_order_project/code/fluorescence_tracing_GUI/data/fluo_tracing/'...
-                    strain_name '/']; % File on dropbox
-    
-    int_filename = [strain_name '_' exp_name '_'  num2str(worm_index) '.mat'];
-    ext_filename = ['fluo_tracing_' strain_name '_' exp_name '_worm_'  num2str(worm_index) '.mat'];
     
     % Plotting parameters
     fs  = 26; % fontsize
@@ -83,15 +88,14 @@ function plot_Z1Z4_traces(experiment_folder,worm_index, axis_handle)
                     [0.7 0.7 0];... %second_born_alpha_color
                     [0.5 0.5 0];];%second_born_beta_color
                 
-    if exist([ext_harddrive_path ext_filename], 'file')
-            disp('Fluorescence tracing file on external drive  found...');
-            load([ext_harddrive_path ext_filename]); % loads variables background, cells
-    elseif exist([int_harddrive_path int_filename], 'file')
+    if exist([tracing_foldername tracing_filename], 'file')
             disp('Fluorescence tracing file on external drive not found. Loading file from Dropbox folder.');
-            load([int_harddrive_path int_filename]); % loads variables background, cells
+            load([tracing_foldername tracing_filename]); % loads variables background, cells
     else
-        disp('Cannot locate tracing files, neither on external hard drive nor on internal one.');
+        disp('Cannot locate tracing files. Did you choose the right experiment_name and worm_index?');
+        disp('Try: ''plot_Z1Z4_traces(''27-Sep-2018'', 2);''');
         return;
+        
     end
     
     
@@ -99,15 +103,10 @@ function plot_Z1Z4_traces(experiment_folder,worm_index, axis_handle)
     bg_intensity = background.intensity(1,:);
     bg_intensity(isnan(bg_intensity)) = 0; % If no defined background, set to zero
 
-    if nargin < 3
-        fig_position = [0.2 0.2 0.35 0.5];
-        fig = figure(14);
-        set(fig, 'units', 'normalized', 'position', fig_position);
-        clf;
-    else
-        % Make axis_handle current axis
-        axis(axis_handle);
-    end
+    fig_position = [0.2 0.2 0.35 0.5];
+    fig = figure(14);
+    set(fig, 'units', 'normalized', 'position', fig_position);
+    clf;
         
     % Check first what's the maximum fluorescence intensity-> plot 
     % 
@@ -217,17 +216,17 @@ function plot_Z1Z4_traces(experiment_folder,worm_index, axis_handle)
         hl = legend(h([1,3,4,2,5,6]), 'Z1.pp','Z1.ppa', 'Z1.ppp', 'Z4.aa', 'Z4.aaa', 'Z4.aap');
     end
 
-    if ~isempty(strfind(experiment_folder, '10-Oct-2018_4')) && worm_index == 2
+    if ~isempty(strfind(experiment_date, '10-Oct-2018_4')) && worm_index == 2
         set(hl, 'box', 'off', 'fontsize', 0.7*fs, 'position',[0.55 0.65  0.1 0.2] );
-    elseif (~isempty(strfind(experiment_folder, '10-Oct-2018_4')) && worm_index == 4)
+    elseif (~isempty(strfind(experiment_date, '10-Oct-2018_4')) && worm_index == 4)
         set(hl, 'box', 'off', 'fontsize', 0.7*fs, 'position',[0.65 0.65  0.1 0.2] );
-    elseif (~isempty(strfind(experiment_folder, '27-Sep-2018')) && worm_index == 9)
+    elseif (~isempty(strfind(experiment_date, '27-Sep-2018')) && worm_index == 9)
         set(hl, 'box', 'off', 'fontsize', 0.7*fs, 'position',[0.65 0.35  0.1 0.2] );
-    elseif (~isempty(strfind(experiment_folder, '27-Sep-2018')) && worm_index == 2)
+    elseif (~isempty(strfind(experiment_date, '27-Sep-2018')) && worm_index == 2)
         set(hl, 'box', 'off', 'fontsize', 0.7*fs, 'position',[0.65 0.65  0.1 0.2] );
-    elseif (~isempty(strfind(experiment_folder, '04-Oct-2018')) && worm_index == 1)
+    elseif (~isempty(strfind(experiment_date, '04-Oct-2018')) && worm_index == 1)
         set(hl, 'box', 'off', 'fontsize', 0.7*fs, 'position',[0.65 0.65  0.1 0.2] );
-    elseif (~isempty(strfind(experiment_folder, '30-May-2019')) && worm_index == 7)
+    elseif (~isempty(strfind(experiment_date, '30-May-2019')) && worm_index == 7)
         set(hl, 'box', 'off', 'fontsize', 0.7*fs, 'position',[0.65 0.65  0.1 0.2] );
     else
         set(hl, 'box', 'off', 'fontsize', 0.7*fs, 'position',[0.25 0.65  0.1 0.2] );
