@@ -1,0 +1,126 @@
+% =============== WORM GONADAL LINEAGING FILE ===========
+%
+% include any comments on the experiment here
+% COMMENTS:
+% animal was imaged with DIC (4ms/37%), mCherry (75ms/50%) every 16min
+% normal mounting, NA22 bacteria as food
+%
+%
+%
+% FOLDER: 27-Sept-2018_? on Hard drive Data9
+%
+% EXPERIMENT : 09/27/2018
+% WORM CHAMBER 10
+%
+% ================= The '##' marks the beginning of relevant information read by the computer
+%
+##
+genotype GS9062
+sex hermaphrodite
+imaging_method	automated
+temperature stage set to: 24.5 degrees
+water bath temperature set to 24.5
+measured temperatures with these settings on objective: 24.5degrees
+synch_date		2018-26-09		### Day of hatch off
+synch_time 		17:00:00			
+growth_condition	plate		### other option is plate (when animals are picked from plates directly
+mount_date 	2018-27-09			### Day when animal was mounted on device
+mount_time 	11:30:00				
+end_of_experiment_date 2018-28-09	### Day when  experiment was finished
+end_of_experiment_time 03:00:00
+
+
+## LETHARGUS INFORMATION
+l1_molt_date NA				### Date of L1/L2 molt, NA means "not applicable", 
+l1_molt_time NC		### this is hours after start of the experiment
+l1_molt_frame_time NC		### this is hours after start of the experiment
+
+l2_molt_date NA 		### Date of L2/L3 molt
+l2_molt_time NC
+l2_molt_frame_time NC
+
+l3_molt_date NA 		### Date of L3/L4 molt
+l3_molt_time NC			### NC means "not captured"
+l3_molt_frame_time NC
+
+l4_molt_date NA 		### Date of L4/adult molt
+l4_molt_time NC
+l4_molt_frame_time NC
+
+first_egg_date NA 	### Date of first egg laying
+first_egg_time NC
+first_egg_frame NC
+
+
+## DIVISIONS
+# Z1
+### First div
+Z1_div_date NA
+Z1_div_time NC
+Z1_div_frame_time NC
+Z1_div_axis 
+
+### Second round
+Z1a_div_date NA
+Z1a_div_time 00:16:00
+Z1a_div_frame_time 00:16:00
+Z1a_div_axis 
+
+Z1p_div_date NA
+Z1p_div_time NC
+Z1p_div_frame_time NC
+Z1p_div_axis 
+
+### Third round
+Z1pa_div_date NA
+Z1pa_div_time 02:00:00
+Z1pa_div_frame_time 02:00:00
+Z1pa_div_axis 
+
+Z1pp_div_date NA
+Z1pp_div_time 02:08:00
+Z1pp_div_frame_time 02:08:00
+Z1pp_div_axis 
+
+
+##
+# Z4
+
+#### First div
+Z4_div_date NA
+Z4_div_time NC
+Z4_div_frame_time NC
+Z4_div_axis 
+
+
+### Second round
+Z4a_div_date NA
+Z4a_div_time 00:16:00
+Z4a_div_frame_time 00:16:00
+Z4a_div_axis 
+
+Z4p_div_date NA
+Z4p_div_time 01:04:00
+Z4p_div_frame_time 01:04:00
+Z4p_div_axis 
+
+### Third round
+Z4aa_div_date NA
+Z4aa_div_time 03:36:00
+Z4aa_div_frame_time 03:36:00
+Z4aa_div_axis 
+
+Z4ap_div_date NA
+Z4ap_div_time 03:36:00
+Z4ap_div_frame_time 03:36:00
+Z4ap_div_axis 
+
+
+## EndOfDivisionInformation
+
+
+## FATES
+Z1ppp_fate VU
+Z4aaa_fate AC
+
+## EndOfFile
