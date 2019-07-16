@@ -12,7 +12,7 @@ function statistical_analyses_Z1Z4lineages()
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-    dirname = '~/Documents/GitHub/Attner_Keil_et_al_2019_code/cell_lineage_analysis/lineaging_data/';
+    dirname = 'lineaging_data/';
     list_file = 'WT_25degrees_list.txt'; %  
 
     fs = 20;
