@@ -11,6 +11,10 @@ data gathered at 25˚C, provide some statistics and scatter plots.
 Within statistical_analyses_Z1Z4lineages.m, you may change the variable list_file to
 'WT_20degrees_list.txt' to analyze and plot data gathered at 20˚C.
  
+The subfolders
+lineaging_data/20degrees & 
+lineaging_data/25degrees 
+contain the .txt files with early somatic cell division timings for individual animals
 
 ## hlh-2 fluorescence tracing
 Executing fluorescence_tracing_GUI(); will open a GUI which allows the user to open a micro-manager data 
