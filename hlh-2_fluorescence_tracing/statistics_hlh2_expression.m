@@ -25,8 +25,8 @@ function statistics_hlh2_expression()
     %%%% of Z1.pp and Z4.aa
     filename = '~/Documents/GitHub/Attner_Keil_et_al_2019_code/hlh-2_fluorescence_tracing/data/GS9062_hlh2_cell_cycle_timing.xlsx';
 
-    lower_ind = 59;
-    upper_ind = 92;
+    lower_ind = 4;
+    upper_ind = 37;
     
     if exist(filename,'file')
         [~ ,sheets] = xlsfinfo(filename);

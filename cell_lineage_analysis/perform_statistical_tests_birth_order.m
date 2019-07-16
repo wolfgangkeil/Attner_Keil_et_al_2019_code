@@ -9,10 +9,8 @@ function perform_statistical_tests_birth_order()
 %
 %
 % see also get_all_Z1_Z4_fates_and_birth_orders.m,
-% read_single_worm_lineage_data.m , statistical_analyses_Z1Z4lineages.m
+% read_single_worm_lineage_data.m, statistical_analyses_Z1Z4lineages.m
 %
-% 
-% 
 %
 % by Wolfgang Keil, wolfgang.keil@curie.fr 2019
 %
