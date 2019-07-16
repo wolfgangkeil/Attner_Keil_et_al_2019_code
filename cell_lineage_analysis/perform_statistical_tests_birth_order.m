@@ -18,8 +18,8 @@ function perform_statistical_tests_birth_order()
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-    dirname = '~/Documents/GitHub/Attner_Keil_et_al_2019_code/cell_lineage_analysis/lineaging_data/';
-    list_file = 'WT_20degrees_list.txt'; % includes only animals, were fate could be scored
+    dirname = 'lineaging_data/';
+    list_file = 'WT_25degrees_list.txt'; % includes only animals, were fate could be scored
 
     % Which sex do we plot
     sex  = 'hermaphrodite';
