@@ -1,4 +1,5 @@
-# Attner & Keil et al. Current Biology (2019) Code and Data repository
+# Attner & Keil et al. Current Biology (2019)
+# Code and Data repository
 
 This repository contains lineaging data, hlh-2 GFP data as well as MATLAB scripts to replicate key figures in
 Attner & Keil et al. Current Biology (2019) . 
