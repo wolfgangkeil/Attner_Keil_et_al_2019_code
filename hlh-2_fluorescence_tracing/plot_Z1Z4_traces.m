@@ -2,11 +2,10 @@ function plot_Z1Z4_traces(experiment_folder,worm_index, axis_handle)
 %
 % DESCRIPTION
 % this function plots a fluorescence traces for Z1.pp and Z4.aa and
-% daughters as in Figure 2, Attner & Keil et al. 2019
+% daughters as in Figure 2A, Figure S2E in Attner & Keil et al. (2019)
 % experiment needs to be stored in a folder {strain_name}/{Micro-Manager folder}
 % 
 % 
-%
 %   
 % by Wolfgang Keil, wolfgang.keil@curie.fr 2019
 %
