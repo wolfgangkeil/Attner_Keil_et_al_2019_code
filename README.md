@@ -1,8 +1,8 @@
 # Attner & Keil et al. Current Biology (2019)
 # Code and Data repository
 
-This repository contains lineaging data, hlh-2::GFP data as well as MATLAB scripts to replicate key figures in
-Attner & Keil et al. Current Biology (2019)
+This repository contains early somatic cell division timing data, GFP::hlh-2 data as well as MATLAB scripts to replicate key figures 
+and statistical analyses in Attner & Keil et al. Current Biology (2019)
 
 For questions, please contact wolfgang.keil@curie.fr
 
@@ -22,7 +22,9 @@ Executing fluorescence_tracing_GUI(); will open a graphical user interface (GUI)
 set and to outline ROIs in order to follow hlh-2 fluorescence in alpha and beta cells over time. This GUI was used to generate fluorescence intensity traces shown
 in Figures 2 and S2. 
 
-The folder data contains an .xlsx file with information about hlh-2 onset and division times of Z1/Z4 and progeny. 
+Execute statistics_hlh2_expression(); to calculate statistics of GFP::hlh-2 onset vs cell division timings. The function reads 
+GS9062_hlh2_cell_cycle_timing.xlsx which contains hlh-2 onset timing and division times of Z1/Z4 and progeny for strain GS9062. 
+
 It also contains a folder with tracings for the example individuals shown in Figures 2 and S2.
 
 ## License
