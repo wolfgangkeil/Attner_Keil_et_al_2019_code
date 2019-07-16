@@ -17,8 +17,6 @@ lineaging_data/20degrees &
 lineaging_data/25degrees 
 contain the .txt files with early somatic cell division timings for individual animals
 
-NOTE: Local paths may have to be adapted to properly execute the scripts. 
-
 ## hlh-2 fluorescence tracing
 Executing fluorescence_tracing_GUI(); will open a graphical user interface (GUI) which allows the user to open a micro-manager data 
 set and to outline ROIs in order to follow hlh-2 fluorescence over time. This GUI was used to generate fluorescence intensity traces shown
@@ -26,8 +24,6 @@ in Figures 2 and S2.
 
 The folder data contains an .xlsx file with information about hlh-2 onset and division times of Z1/Z4 and progeny 
 It also contains a folder with tracings for the examples individuals shown in Figures 2 and S2.
-
-NOTE: Local paths may have to be adapted to properly execute the scripts. 
 
 ## License
 Copyright (c) [2019] [Wolfgang Keil]
