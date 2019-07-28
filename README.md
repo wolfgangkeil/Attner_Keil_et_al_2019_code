@@ -1,7 +1,7 @@
 # Attner & Keil et al. Current Biology (2019)
 # Code and Data repository
 
-This repository contains early somatic cell division timing data, GFP::hlh-2 data as well as MATLAB scripts to replicate key figures 
+This repository contains early somatic cell division timing data, GFP::hlh-2 data as well as MATLAB® scripts to replicate key figures 
 and statistical analyses in Attner & Keil et al. Current Biology (2019)
 
 If you use this code please cite: Attner, Keil, Benadivez & Greenwald, 2019
