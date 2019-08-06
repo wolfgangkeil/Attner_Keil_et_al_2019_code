@@ -16,7 +16,7 @@ Within statistical_analyses_Z1Z4lineages.m, you may change the variable list_fil
 The subfolders
 lineaging_data/20degrees & 
 lineaging_data/25degrees 
-contain the .txt files with early somatic cell division timings for individual animals
+contain the .txt files with early somatic gonad cell division timings for individual animals
 
 ## HLH-2 fluorescence tracing
 Executing fluorescence_tracing_GUI(); will open a graphical user interface (GUI) which allows the user to open a micro-manager data 
