@@ -1,5 +1,5 @@
 function [birth_order_1st_round,birth_order_2nd_round,birth_order_3rd_round,...
-    cc_lengths_2nd,cc_lengths_3rd, fates] = get_all_Z1_Z4_fates_and_birth_orders(dirname, list_file,sex)
+    cc_lengths_2nd,cc_lengths_3rd, fates] = get_all_Z1_Z4_fates_and_birth_orders(dirname, list_file)
 %
 % DESCRIPTION 
 % This function reads early somatic cell divisions and Z1.ppp and Z4.aaa cell fates 
@@ -11,7 +11,6 @@ function [birth_order_1st_round,birth_order_2nd_round,birth_order_3rd_round,...
 % 
 % this function gets all Z1_fates, Z4_fates for worms of sex "sex" in the worm_list, given by
 % 'list_file' in the folder 'dirname'
-% sex can be either 'male' or 'hermaphrodite'
 %
 % 
 %
@@ -35,10 +34,6 @@ function [birth_order_1st_round,birth_order_2nd_round,birth_order_3rd_round,...
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-    if nargin < 3
-        sex = 'hermaphrodite';
-    end
-    
     verbose  = 0;
 
     fid = fopen([dirname list_file]);
@@ -76,40 +71,20 @@ function [birth_order_1st_round,birth_order_2nd_round,birth_order_3rd_round,...
         [div_times_2nd, cc_len_2nd] = get_2nd_division_times(worm);
         [div_times_3rd, cc_len_3rd] = get_3rd_division_times(worm);
         
-        if strcmpi('hermaphrodite', sex)
-            % Only read hermaphrodites here
-            if strcmpi(worm.sex, sex)
-                fates = [fates ; get_fates(worm)];   
-                birth_order_1st_round = [birth_order_1st_round, div_times_1st.Z1 - div_times_1st.Z4];
-                birth_order_2nd_round = [birth_order_2nd_round, div_times_2nd.Z1p - div_times_2nd.Z4a];
-                birth_order_3rd_round = [birth_order_3rd_round, div_times_3rd.Z1pp - div_times_3rd.Z4aa];
-                
-                cc_lengths_2nd.Z1a = [cc_lengths_2nd.Z1a cc_len_2nd.Z1a];
-                cc_lengths_2nd.Z1p = [cc_lengths_2nd.Z1p cc_len_2nd.Z1p];
-                cc_lengths_2nd.Z4a = [cc_lengths_2nd.Z4a cc_len_2nd.Z4a];
-                cc_lengths_2nd.Z4p = [cc_lengths_2nd.Z4p cc_len_2nd.Z4p];
-                
-                cc_lengths_3rd.Z1pa = [cc_lengths_3rd.Z1pa, cc_len_3rd.Z1pa];
-                cc_lengths_3rd.Z1pp = [cc_lengths_3rd.Z1pp, cc_len_3rd.Z1pp];
-                cc_lengths_3rd.Z4aa = [cc_lengths_3rd.Z4aa, cc_len_3rd.Z4aa];
-                cc_lengths_3rd.Z4ap = [cc_lengths_3rd.Z4ap, cc_len_3rd.Z4ap];
-   
-            else
-                disp('No Sex specified?');
-                
-            end
-        else
-            % Only read males here, take Z1.pa as precursor of Z1.paa (LC
-            % or VD)
-            if strcmpi(worm.sex, sex) % make sure it's actually a male
-                get_fates(worm)
-                fates = [fates ; get_fates(worm)];   
-                birth_order_1st_round = [birth_order_1st_round, div_times_1st.Z1 - div_times_1st.Z4];
-                birth_order_2nd_round = [birth_order_2nd_round, div_times_2nd.Z1p - div_times_2nd.Z4a];
-                birth_order_3rd_round = [birth_order_3rd_round, div_times_3rd.Z1pa - div_times_3rd.Z4aa];
-            end
-        end
+        fates = [fates ; get_fates(worm)];   
+        birth_order_1st_round = [birth_order_1st_round, div_times_1st.Z1 - div_times_1st.Z4];
+        birth_order_2nd_round = [birth_order_2nd_round, div_times_2nd.Z1p - div_times_2nd.Z4a];
+        birth_order_3rd_round = [birth_order_3rd_round, div_times_3rd.Z1pp - div_times_3rd.Z4aa];
+
+        cc_lengths_2nd.Z1a = [cc_lengths_2nd.Z1a cc_len_2nd.Z1a];
+        cc_lengths_2nd.Z1p = [cc_lengths_2nd.Z1p cc_len_2nd.Z1p];
+        cc_lengths_2nd.Z4a = [cc_lengths_2nd.Z4a cc_len_2nd.Z4a];
+        cc_lengths_2nd.Z4p = [cc_lengths_2nd.Z4p cc_len_2nd.Z4p];
+
+        cc_lengths_3rd.Z1pa = [cc_lengths_3rd.Z1pa, cc_len_3rd.Z1pa];
+        cc_lengths_3rd.Z1pp = [cc_lengths_3rd.Z1pp, cc_len_3rd.Z1pp];
+        cc_lengths_3rd.Z4aa = [cc_lengths_3rd.Z4aa, cc_len_3rd.Z4aa];
+        cc_lengths_3rd.Z4ap = [cc_lengths_3rd.Z4ap, cc_len_3rd.Z4ap];
+
     end
-
-
 end

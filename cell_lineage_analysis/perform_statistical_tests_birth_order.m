@@ -18,15 +18,12 @@ function perform_statistical_tests_birth_order()
 
     dirname = 'lineaging_data/';
     list_file = 'WT_25degrees_list.txt'; % includes only animals, were fate could be scored
-
-    % Which sex do we plot
-    sex  = 'hermaphrodite';
-
     %%% First, read all the worm with hermaphrodite sex
     disp('Reading all worm files ...');
+    
     [birth_order_1st_round,birth_order_2nd_round,birth_order_3rd_round,...
         cc_lengths_2nd, cc_lengths_3rd, fates] ...
-        = get_all_Z1_Z4_fates_and_birth_orders(dirname, list_file, sex);
+        = get_all_Z1_Z4_fates_and_birth_orders(dirname, list_file);
 
     %%%% Find all worms, in which Z1.ppp adopted the AC or VU fate
     Z1ppp_AC = find(strcmpi(fates(:,1),'AC'));
@@ -95,32 +92,7 @@ function perform_statistical_tests_birth_order()
         disp(['N = ' num2str(tt1 + tt2)]);
         disp(['p(cell=first-born | cell-fate=AC, dt < ' num2str(time_threshold)  ' h):  ' num2str(r.CI(1))  ' < ' num2str(r.estimator) ' < ' num2str(r.CI(2)) ]);
 
-       
-        
-%         % 
-%         % ask what whether, if Z1.ppp is first-born, the probability of (Z1.ppp = AC) is equal to the probability of (Z1.ppp = VU).
-%         tt1 = sum(strcmpi(fates_subset_Z1ppp(:,1),'AC') & birth_order_3rd_round_subset' < 0);        
-%         tt2 = sum(strcmpi(fates_subset_Z1ppp(:,1),'VU') & birth_order_3rd_round_subset' < 0);
-%         
-%         r.estimator  = tt1/(tt1 + tt2);
-%         E = Z_value/2/sqrt(tt1 + tt2);
-%         r.CI = [r.estimator-E, r.estimator+E];
-% 
-%         disp(['N = ' num2str(tt1 + tt2)]);
-%         disp(['p(Z1.ppp=AC | Z1.ppp first-born, dt < ' num2str(time_threshold)  ' h):  ' num2str(r.CI(1))  ' < ' num2str(r.estimator) ' < ' num2str(r.CI(2)) ]);
-%         
-% 
-%         % Ask what whether, if Z1.ppp=AC, the probability of (Z1.ppp first-born) is equal to the probability of (Z1.ppp second-born).
-%         tt1 = sum(strcmpi(fates_subset_Z1ppp(:,1),'AC') & birth_order_3rd_round_subset' < 0);        
-%         tt2 = sum(strcmpi(fates_subset_Z1ppp(:,1),'AC') & birth_order_3rd_round_subset' > 0);
-%         
-%         r.estimator  = tt1/(tt1 + tt2);
-%         E = Z_value/2/sqrt(tt1 + tt2);
-%         r.CI = [r.estimator-E, r.estimator+E];
-% 
-%         disp(['N = ' num2str(tt1 + tt2)]);
-%         disp(['p(Z1.ppp first-born | Z1.ppp=AC, dt < ' num2str(time_threshold)  ' h):  ' num2str(r.CI(1))  ' < ' num2str(r.estimator) ' < ' num2str(r.CI(2)) ]);
-        
+  
     end
     
     

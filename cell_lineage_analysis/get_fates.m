@@ -6,31 +6,16 @@ function fates = get_fates(worm)
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-   if strcmpi(worm.sex, 'hermaphrodite')
 
-       if isfield(worm, 'Z1ppp_fate')        
-            fates{1} = worm.Z1ppp_fate;
-        else
-            fates{1} = NaN;          
-        end
+   if isfield(worm, 'Z1ppp_fate')        
+        fates{1} = worm.Z1ppp_fate;
+    else
+        fates{1} = NaN;          
+    end
 
-        if isfield(worm, 'Z4aaa_fate')        
-            fates{2} = worm.Z4aaa_fate;
-        else
-            fates{2} = NaN;          
-        end
-   else
-
-       if isfield(worm, 'Z1paa_fate')        
-            fates{1} = worm.Z1paa_fate;
-        else
-            fates{1} = NaN;          
-        end
-
-        if isfield(worm, 'Z4aaa_fate')        
-            fates{2} = worm.Z4aaa_fate;
-        else
-            fates{2} = NaN;          
-        end
-   end
+    if isfield(worm, 'Z4aaa_fate')        
+        fates{2} = worm.Z4aaa_fate;
+    else
+        fates{2} = NaN;          
+    end
 end

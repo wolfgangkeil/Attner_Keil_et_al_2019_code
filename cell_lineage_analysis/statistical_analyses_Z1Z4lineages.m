@@ -19,13 +19,11 @@ function statistical_analyses_Z1Z4lineages()
     ms = 14;
     t_factor = 60;
 
-    % Which sex do we plot
-    sex  = 'hermaphrodite';
         
     %%% First, read all the worm with hermaphrodite sex
     [~,~,birth_order_3rd_round,...
         cc_lengths_2nd, cc_lengths_3rd, fates] ...
-        = get_all_Z1_Z4_fates_and_birth_orders(dirname, list_file, sex);
+        = get_all_Z1_Z4_fates_and_birth_orders(dirname, list_file);
 
     %%%%%%%%%%%%%%%%%%%% PLOTTING Z1.p vs. Z4.a cc-lengths
     figure(1)

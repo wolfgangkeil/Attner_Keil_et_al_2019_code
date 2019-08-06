@@ -1,4 +1,4 @@
-function plot_Z1Z4_traces(experiment_date,worm_index)
+function plot_Z1Z4_traces(worm_index)
 %
 % DESCRIPTION
 % this function plots a fluorescence traces for Z1.pp and Z4.aa and
@@ -6,10 +6,10 @@ function plot_Z1Z4_traces(experiment_date,worm_index)
 % experiment needs to be stored in a folder {strain_name}/{Micro-Manager folder}
 % 
 % EXAMPLES: 
-% plot_Z1Z4_traces('27-Sep-2018', 2);
-% plot_Z1Z4_traces('10-Oct-2018', 2);
-% plot_Z1Z4_traces('10-Oct-2018', 4);
-% plot_Z1Z4_traces('10-Oct-2018', 9);
+% plot_Z1Z4_traces(1);
+% plot_Z1Z4_traces(2);
+% plot_Z1Z4_traces(3);
+% plot_Z1Z4_traces(4);
 %   
 % by Wolfgang Keil, wolfgang.keil@curie.fr 2019
 %
@@ -22,52 +22,31 @@ function plot_Z1Z4_traces(experiment_date,worm_index)
     do_filtering = 1;
     
     addpath('../cell_lineage_analysis/');
-    tracing_foldername = ['data/fluo_tracing/' ...
-                    strain_name '/']; % folder with .mat files 
-    
     
     % Filter settings
     filter_shape = 'Gaussian';
     filter_type = 'lowpass';
     lp_cutoff = 0.15; % 9min Gaussian low-pass
     
-    %  experiments are imaged every 16min, except 10-Oct-2018
     plot_alphacells_only = 1;
-    if strfind(experiment_date, '10-Oct-2018')
+    if worm_index == 5 || worm_index == 6 || worm_index == 7 % these worms were imaged at 8min time interval
         imaging_interval = 8;        
     else
         imaging_interval = 16;
-    end
+    end    
     
-    % Cases 1,2,3 in Figure 2 of Attner & Keil et al., 2019
-    if (strfind(experiment_date, '10-Oct-2018') & (worm_index ==  2 || worm_index ==  9)) | ...
-            (strfind(experiment_date, '04-Oct-2018') & worm_index ==  7)
-        plot_alphacells_only = 1;
-    end
-    
-    
+
+    index_string = num2str(worm_index);
+    index_string = [repmat('0', [1 3-length(index_string)]) index_string];
     
     % Generate the worm_file name to get birth-timings (need to rename months to numbers)
     worm_file_folder = ['../cell_lineage_analysis/lineaging_data/25degrees/' strain_name '/'];
-    if strfind(experiment_date, 'Nov-2018')
-        worm_filename = [strain_name '_2018-11-' experiment_date(1:2) '_Worm' num2str(worm_index) '.txt'];
-    elseif strfind(experiment_date, 'Oct-2018')
-        worm_filename = [strain_name '_2018-10-' experiment_date(1:2) '_Worm' num2str(worm_index) '.txt'];
-    elseif strfind(experiment_date, 'Sep-2018')
-        worm_filename = [strain_name '_2018-09-' experiment_date(1:2) '_Worm' num2str(worm_index) '.txt'];
-    elseif strfind(experiment_date, 'Apr-2018')
-        worm_filename = [strain_name '_2018-04-' experiment_date(1:2) '_Worm' num2str(worm_index) '.txt'];
-    elseif strfind(experiment_date, 'May-2018')
-        worm_filename = [strain_name '_2018-05-' experiment_date(1:2) '_Worm' num2str(worm_index) '.txt'];
-    elseif strfind(experiment_date, 'May-2019')
-        worm_filename = [strain_name '_2019-05-' experiment_date(1:2) '_Worm' num2str(worm_index) '.txt'];
-    elseif strfind(experiment_date, 'Apr-2019')
-        worm_filename = [strain_name '_2019-04-' experiment_date(1:2) '_Worm' num2str(worm_index) '.txt'];
-    end
+    worm_filename = [strain_name '_worm_' index_string '.txt'];
     
-    
-    tracing_filename = [strain_name '_' experiment_date '_'  num2str(worm_index) '.mat'];
-    
+    tracing_foldername = ['data/fluo_tracing/' ...
+                    strain_name '/']; % folder with .mat files 
+    tracing_filename = [strain_name '_worm_' index_string '.mat'];
+        
     %
     disp('Loading lineage file...');
     worm = read_single_worm_lineage_data([worm_file_folder worm_filename]);
@@ -89,13 +68,11 @@ function plot_Z1Z4_traces(experiment_date,worm_index)
                     [0.5 0.5 0];];%second_born_beta_color
                 
     if exist([tracing_foldername tracing_filename], 'file')
-            disp('Fluorescence tracing file on external drive not found. Loading file from Dropbox folder.');
+            disp('Loading GFP-HLH-2 tracings file ...');
             load([tracing_foldername tracing_filename]); % loads variables background, cells
     else
-        disp('Cannot locate tracing files. Did you choose the right experiment_name and worm_index?');
-        disp('Try: ''plot_Z1Z4_traces(''27-Sep-2018'', 2);''');
+        disp('Cannot locate tracing file. Did you choose the right worm_index?');
         return;
-        
     end
     
     
@@ -216,21 +193,7 @@ function plot_Z1Z4_traces(experiment_date,worm_index)
         hl = legend(h([1,3,4,2,5,6]), 'Z1.pp','Z1.ppa', 'Z1.ppp', 'Z4.aa', 'Z4.aaa', 'Z4.aap');
     end
 
-    if ~isempty(strfind(experiment_date, '10-Oct-2018_4')) && worm_index == 2
-        set(hl, 'box', 'off', 'fontsize', 0.7*fs, 'position',[0.55 0.65  0.1 0.2] );
-    elseif (~isempty(strfind(experiment_date, '10-Oct-2018_4')) && worm_index == 4)
-        set(hl, 'box', 'off', 'fontsize', 0.7*fs, 'position',[0.65 0.65  0.1 0.2] );
-    elseif (~isempty(strfind(experiment_date, '27-Sep-2018')) && worm_index == 9)
-        set(hl, 'box', 'off', 'fontsize', 0.7*fs, 'position',[0.65 0.35  0.1 0.2] );
-    elseif (~isempty(strfind(experiment_date, '27-Sep-2018')) && worm_index == 2)
-        set(hl, 'box', 'off', 'fontsize', 0.7*fs, 'position',[0.65 0.65  0.1 0.2] );
-    elseif (~isempty(strfind(experiment_date, '04-Oct-2018')) && worm_index == 1)
-        set(hl, 'box', 'off', 'fontsize', 0.7*fs, 'position',[0.65 0.65  0.1 0.2] );
-    elseif (~isempty(strfind(experiment_date, '30-May-2019')) && worm_index == 7)
-        set(hl, 'box', 'off', 'fontsize', 0.7*fs, 'position',[0.65 0.65  0.1 0.2] );
-    else
-        set(hl, 'box', 'off', 'fontsize', 0.7*fs, 'position',[0.25 0.65  0.1 0.2] );
-    end
+    set(hl, 'box', 'off', 'fontsize', 0.7*fs, 'position',[0.25 0.65  0.1 0.2] );
     set(gcf,'color', 'w');
     ylim = get(gca,'ylim'); set(gca, 'ylim',[-5 ylim(2)]);
     
