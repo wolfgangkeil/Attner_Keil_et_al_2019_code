@@ -1,0 +1,78 @@
+% =============== WORM GONADAL LINEAGING FILE ===========
+%
+% ================= The '##' marks the beginning of relevant information read by the computer
+%
+##
+
+## DIVISIONS
+# Z1
+### First div
+Z1_div_date NA
+Z1_div_time 01:12:00
+Z1_div_frame_time 01:12:00
+Z1_div_axis AP
+
+### Second round
+Z1a_div_date NA
+Z1a_div_time 05:12:00
+Z1a_div_frame_time 05:12:00
+Z1a_div_axis DV
+
+Z1p_div_date NA
+Z1p_div_time 03:52:00
+Z1p_div_frame_time 03:52:00
+Z1p_div_axis AP
+
+### Third round
+Z1pa_div_date NA
+Z1pa_div_time 07:52:00
+Z1pa_div_frame_time 07:52:00
+Z1pa_div_axis AP
+
+Z1pp_div_date NA
+Z1pp_div_time 07:20:00
+Z1pp_div_frame_time 07:20:00
+Z1pp_div_axis AP
+
+
+##
+# Z4
+
+#### First div
+Z4_div_date NA
+Z4_div_time 02:08:00
+Z4_div_frame_time 02:08:00
+Z4_div_axis AP
+
+
+### Second round
+Z4a_div_date NA
+Z4a_div_time 05:20:00
+Z4a_div_frame_time 05:20:00
+Z4a_div_axis AP
+
+Z4p_div_date NA
+Z4p_div_time 06:00:00
+Z4p_div_frame_time 06:00:00
+Z4p_div_axis AP
+
+### Third round
+Z4aa_div_date NA
+Z4aa_div_time 08:56:00
+Z4aa_div_frame_time 08:56:00
+Z4aa_div_axis AP
+
+Z4ap_div_date NA
+Z4ap_div_time 09:04:00
+Z4ap_div_frame_time 09:04:00
+Z4ap_div_axis AP
+
+
+## EndOfDivisionInformation
+
+
+## FATES
+Z1ppp_fate VU
+Z4aaa_fate AC
+
+## EndOfFile
