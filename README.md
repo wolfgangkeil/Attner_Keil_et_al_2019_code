@@ -5,7 +5,7 @@ This repository contains early somatic gonad cell division timing data, GFP::HLH
 
 If you use this code please cite: Attner, Keil, Benadivez & Greenwald, 2019
 
-For questions, please contact wolfgang.keil@curie.fr
+For questions, please contact wolfgang.keil@curie.fr or ma3325@columbia.edu
 
 ## Cell lineage analysis
 Executing statistical_analyses_Z1Z4lineages() will load all early somatic gonad cell division timing 
